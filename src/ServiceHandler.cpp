@@ -43,3 +43,23 @@ void ServiceHandler::Get(http_request req)
 	ret[U("value")] = json::value::string(U("hello,world!!"));
 	req.reply(http::status_codes::OK, ret);	
 }
+
+void ServiceHandler::Post(http_request req)
+{
+	if(req.headers().content_type() != U("application/json"))
+	{
+		json::value ret;
+		ret[U("err-msg")] = json::value::string(U("content-type is not application/json"));
+		req.extract_string().then([&](pplx::task<utility::string_t> task){
+			ret[U("req")] = json::value::string(task.get());
+			req.reply(http::status_codes::OK, ret);
+		}).wait();
+		return;
+	}
+	
+	json::value ret;
+	req.extract_json().then([&](pplx::task<json::value> task){
+		ret = task.get();
+	}).wait();
+	req.reply(http::status_codes::OK, ret);
+}

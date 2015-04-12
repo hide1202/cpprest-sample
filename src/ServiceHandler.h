@@ -11,4 +11,5 @@ private:
 public:
 	static shared_ptr<vector<utility::string_t>> Uri(http_request req);
 	static void Get(http_request req);
+	static void Post(http_request req);
 };

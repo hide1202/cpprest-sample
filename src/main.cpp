@@ -10,6 +10,7 @@ int main()
 
 	auto listener = make_shared<http_listener>(config->Uri());
 	listener->support(methods::GET, ServiceHandler::Get);
+	listener->support(methods::POST, ServiceHandler::Post);
 
 	listener->open().then([&config](){
 #ifdef _UTF16_STRINGS
