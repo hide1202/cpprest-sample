@@ -12,7 +12,11 @@ int main()
 	listener->support(methods::GET, ServiceHandler::Get);
 
 	listener->open().then([&config](){
+#ifdef _UTF16_STRINGS
 		wcout << config->Uri() << " server is open!!" << endl;
+#else
+		cout << config->Uri() << " server is open!!" << endl;
+#endif
 	}).wait();
 
 	getchar();
