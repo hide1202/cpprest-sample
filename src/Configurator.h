@@ -1,7 +1,6 @@
 #pragma once
 
 #include "stdafx.h"
-#include "filestream.h"
 
 class Configurator
 {
