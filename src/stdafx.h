@@ -6,5 +6,3 @@
 
 #include "Configurator.h"
 #include "ServiceHandler.h"
-
-#define URI "http://localhost:8080"
